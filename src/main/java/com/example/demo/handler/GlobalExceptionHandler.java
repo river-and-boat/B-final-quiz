@@ -1,7 +1,10 @@
 package com.example.demo.handler;
 
 import com.example.demo.exception.ErrorResult;
+import com.example.demo.exception.group.GroupNameHasExistException;
+import com.example.demo.exception.group.GroupNotExistException;
 import com.example.demo.exception.trainee.TraineeNotExistException;
+import com.example.demo.exception.trainer.TrainerNotExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -35,8 +38,29 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TraineeNotExistException.class)
-    public ResponseEntity userExistException(TraineeNotExistException traineeNotExistException) {
+    public ResponseEntity traineeExistException(TraineeNotExistException traineeNotExistException) {
         ErrorResult errorResult = new ErrorResult(traineeNotExistException.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(errorResult);
+    }
+
+    @ExceptionHandler(TraineeNotExistException.class)
+    public ResponseEntity trainerExistException(TrainerNotExistException trainerNotExistException) {
+        ErrorResult errorResult = new ErrorResult(trainerNotExistException.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(errorResult);
+    }
+
+    @ExceptionHandler(GroupNameHasExistException.class)
+    public ResponseEntity groupNameHasExist(GroupNameHasExistException groupNameHasExistException) {
+        ErrorResult errorResult = new ErrorResult(groupNameHasExistException.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(errorResult);
+    }
+
+    @ExceptionHandler(GroupNotExistException.class)
+    public ResponseEntity groupNotExist(GroupNotExistException groupNotExistException) {
+        ErrorResult errorResult = new ErrorResult(groupNotExistException.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(errorResult);
     }

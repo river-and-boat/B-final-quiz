@@ -33,10 +33,9 @@ public class TrainerService {
         return trainerRepository.save(trainerEntity);
     }
 
-    public TrainerEntity deleteTrainer(Long trainerId) {
+    public void deleteTrainer(Long trainerId) {
         TrainerEntity deletingTrainer = trainerRepository.findById(trainerId)
                 .orElseThrow(() -> new TrainerNotExistException(ExceptionMessage.TRAINER_NOT_EXIST));
         trainerRepository.delete(deletingTrainer);
-        return deletingTrainer;
     }
 }

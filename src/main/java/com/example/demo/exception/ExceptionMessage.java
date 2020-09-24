@@ -12,4 +12,7 @@ public class ExceptionMessage {
     public static final String TRAINEE_NOT_EXIST = "学员不存在";
 
     public static final String TRAINER_NOT_EXIST = "讲师不存在";
+
+    public static final String GROUP_NOT_EXIST = "分组不存在";
+    public static final String GROUP_NAME_HAS_EXIST = "分组不存在";
 }

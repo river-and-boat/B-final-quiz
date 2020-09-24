@@ -25,11 +25,10 @@ public class TraineeService {
         return traineeRepository.save(traineeEntity);
     }
 
-    public TraineeEntity deleteTrainee(Long traineeId) {
+    public void deleteTrainee(Long traineeId) {
         TraineeEntity traineeEntity = traineeRepository.findById(traineeId)
                 .orElseThrow(() -> new TraineeNotExistException(ExceptionMessage.TRAINEE_NOT_EXIST));
         traineeRepository.delete(traineeEntity);
-        return traineeEntity;
     }
 
     public List<TraineeEntity> getTrainees(boolean grouped) {

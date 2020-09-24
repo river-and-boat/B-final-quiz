@@ -29,9 +29,8 @@ public class TraineeController {
 
     @DeleteMapping("/trainees/{trainee_id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public TraineeDTO deleteTrainee(@PathVariable Long trainee_id) {
-        TraineeEntity deletedTrainee = traineeService.deleteTrainee(trainee_id);
-        return ConvertTool.convertObject(deletedTrainee, TraineeDTO.class);
+    public void deleteTrainee(@PathVariable Long trainee_id) {
+        traineeService.deleteTrainee(trainee_id);
     }
 
     @GetMapping("/trainees")
