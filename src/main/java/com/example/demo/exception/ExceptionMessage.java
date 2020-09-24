@@ -15,4 +15,5 @@ public class ExceptionMessage {
 
     public static final String GROUP_NOT_EXIST = "分组不存在";
     public static final String GROUP_NAME_HAS_EXIST = "分组不存在";
+    public static final String GROUPING_TRAINER_COUNT_LESS_THAN_2 = "分组失败，讲师人数不能少于2人";
 }

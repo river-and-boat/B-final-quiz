@@ -3,6 +3,7 @@ package com.example.demo.handler;
 import com.example.demo.exception.ErrorResult;
 import com.example.demo.exception.group.GroupNameHasExistException;
 import com.example.demo.exception.group.GroupNotExistException;
+import com.example.demo.exception.group.GroupingException;
 import com.example.demo.exception.trainee.TraineeNotExistException;
 import com.example.demo.exception.trainer.TrainerNotExistException;
 import org.springframework.http.HttpStatus;
@@ -62,6 +63,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity groupNotExist(GroupNotExistException groupNotExistException) {
         ErrorResult errorResult = new ErrorResult(groupNotExistException.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(errorResult);
+    }
+
+    @ExceptionHandler(GroupingException.class)
+    public ResponseEntity groupingException(GroupingException groupingException) {
+        ErrorResult errorResult = new ErrorResult(groupingException.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(errorResult);
     }
 

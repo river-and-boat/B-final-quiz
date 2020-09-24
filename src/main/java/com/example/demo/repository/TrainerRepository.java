@@ -9,4 +9,5 @@ import java.util.List;
 public interface TrainerRepository extends CrudRepository<TrainerEntity, Long> {
     List<TrainerEntity> findAllByGroupNotIn(List<GroupEntity> groups);
     List<TrainerEntity> findAllByGroupIn(List<GroupEntity> groups);
+    List<TrainerEntity> findAll();
 }
