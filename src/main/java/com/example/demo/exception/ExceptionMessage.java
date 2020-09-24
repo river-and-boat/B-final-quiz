@@ -9,5 +9,7 @@ public class ExceptionMessage {
 
     public static final String TRAINER_NAME_NOT_EMPTY = "教师姓名不能为空";
 
-    public static final String TRAINER_NOT_EXIST = "学员不存在";
+    public static final String TRAINEE_NOT_EXIST = "学员不存在";
+
+    public static final String TRAINER_NOT_EXIST = "讲师不存在";
 }

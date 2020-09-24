@@ -28,7 +28,4 @@ public class TraineeDTO {
 
     @NotEmpty(message = ExceptionMessage.TRAINEE_ZOOM_ID_NOT_VALID)
     private String zoomId;
-
-    @JsonIgnore
-    private GroupEntity group;
 }
