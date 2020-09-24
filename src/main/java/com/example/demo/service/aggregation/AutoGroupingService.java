@@ -38,7 +38,7 @@ public class AutoGroupingService {
 
     @Transactional
     public List<GroupEntity> autoGrouping() {
-        groupRepository.deleteAll();
+        init();
         List<TrainerEntity> allTrainer = trainerRepository.findAll();
         int trainerNumber = allTrainer.size();
         if (trainerNumber < GROUP_TRAINER_NUMBER) {
@@ -77,5 +77,11 @@ public class AutoGroupingService {
             previousTrainerNumber += GROUP_TRAINER_NUMBER;
         }
         return groupRepository.findAll();
+    }
+
+    private void init() {
+        traineeRepository.clearGroupForeignKey();
+        trainerRepository.clearGroupForeignKey();
+        groupRepository.deleteAll();
     }
 }

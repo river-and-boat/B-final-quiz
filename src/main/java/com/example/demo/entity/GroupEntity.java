@@ -21,9 +21,9 @@ public class GroupEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<TraineeEntity> trainees;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<TrainerEntity> trainers;
 }
