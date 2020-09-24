@@ -28,4 +28,7 @@ public class TraineeDTO {
 
     @NotEmpty(message = ExceptionMessage.TRAINEE_ZOOM_ID_NOT_VALID)
     private String zoomId;
+
+    @NotEmpty(message = ExceptionMessage.TRAINEE_GITHUB_NOT_VALID)
+    private String github;
 }

@@ -25,6 +25,8 @@ public class TraineeEntity {
 
     private String zoomId;
 
+    private String github;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "groupId")
     @JsonIgnore

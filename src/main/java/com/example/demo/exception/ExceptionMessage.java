@@ -6,6 +6,8 @@ public class ExceptionMessage {
     public static final String TRAINEE_EMAIL_NOT_EMPTY = "学员邮箱不能为空";
     public static final String TRAINEE_EMAIL_NOT_VALID = "学员邮箱不合法";
     public static final String TRAINEE_ZOOM_ID_NOT_VALID = "学员zoom id不能为空";
+    public static final String TRAINEE_GITHUB_NOT_VALID = "学员GitHub不能为空";
+
 
     public static final String TRAINER_NAME_NOT_EMPTY = "教师姓名不能为空";
 
