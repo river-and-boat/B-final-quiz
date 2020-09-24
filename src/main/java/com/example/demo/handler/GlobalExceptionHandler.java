@@ -1,5 +1,6 @@
 package com.example.demo.handler;
 
+import com.example.demo.exception.ErrorDetailResult;
 import com.example.demo.exception.ErrorResult;
 import com.example.demo.exception.group.GroupNameHasExistException;
 import com.example.demo.exception.group.GroupNotExistException;
@@ -24,27 +25,27 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorResult> constraintException(ConstraintViolationException ex) {
-        ErrorResult errorResult = ErrorResult
+    public ResponseEntity<ErrorDetailResult> constraintException(ConstraintViolationException ex) {
+        ErrorDetailResult errorDetailResult = ErrorDetailResult
                 .builder().errorMessage("对象校验错误").details(new HashMap<>()).build();
         ex.getConstraintViolations()
-                .stream().forEach(s -> errorResult.getDetails()
+                .stream().forEach(s -> errorDetailResult.getDetails()
                 .put(s.getInvalidValue().toString(), s.getMessage()));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(errorResult);
+                .body(errorDetailResult);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResult> handle(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ErrorDetailResult> handle(MethodArgumentNotValidException ex) {
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
-        ErrorResult errorResult = ErrorResult.builder()
+        ErrorDetailResult errorDetailResult = ErrorDetailResult.builder()
                 .errorMessage("Invalid params").build();
         Map<String, String> errorMap = new HashMap<>();
         fieldErrors.stream().forEach(f -> {
             errorMap.put(f.getField(), f.getDefaultMessage());
         });
-        errorResult.setDetails(errorMap);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+        errorDetailResult.setDetails(errorMap);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorDetailResult);
     }
 
     @ExceptionHandler(TraineeNotExistException.class)
