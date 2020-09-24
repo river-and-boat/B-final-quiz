@@ -8,6 +8,7 @@ import com.example.demo.exception.trainee.TraineeNotExistException;
 import com.example.demo.exception.trainer.TrainerNotExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,6 +17,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -33,9 +36,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResult> handle(MethodArgumentNotValidException ex) {
-        String message = ex.getBindingResult().getFieldError().getDefaultMessage();
+        List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
         ErrorResult errorResult = ErrorResult.builder()
-                .errorMessage(message).build();
+                .errorMessage("Invalid params").build();
+        Map<String, String> errorMap = new HashMap<>();
+        fieldErrors.stream().forEach(f -> {
+            errorMap.put(f.getField(), f.getDefaultMessage());
+        });
+        errorResult.setDetails(errorMap);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
     }
 
