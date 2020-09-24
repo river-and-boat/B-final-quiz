@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface TraineeRepository extends CrudRepository<TraineeEntity, Long> {
     List<TraineeEntity> findAllByGroupIn(List<GroupEntity> groups);
-    List<TraineeEntity> findAllByGroupNotIn(List<GroupEntity> group);
+    List<TraineeEntity> findAllByGroupEquals(GroupEntity group);
     List<TraineeEntity> findAll();
 }

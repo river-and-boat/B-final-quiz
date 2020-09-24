@@ -26,7 +26,8 @@ public class TrainerService {
         if (grouped) {
             return trainerRepository.findAllByGroupIn(groups);
         }
-        return trainerRepository.findAllByGroupNotIn(groups);
+        // 默认group为null，即未分组
+        return trainerRepository.findAllByGroupEquals(null);
     }
 
     public TrainerEntity saveTrainer(TrainerEntity trainerEntity) {

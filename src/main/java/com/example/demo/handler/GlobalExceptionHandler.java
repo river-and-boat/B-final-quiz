@@ -9,6 +9,7 @@ import com.example.demo.exception.trainer.TrainerNotExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -45,7 +46,7 @@ public class GlobalExceptionHandler {
                 .body(errorResult);
     }
 
-    @ExceptionHandler(TraineeNotExistException.class)
+    @ExceptionHandler(TrainerNotExistException.class)
     public ResponseEntity trainerExistException(TrainerNotExistException trainerNotExistException) {
         ErrorResult errorResult = new ErrorResult(trainerNotExistException.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -77,6 +78,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResult> requestParameterNotMatch(MethodArgumentTypeMismatchException ex) {
         String parameterName = ex.getParameter().getParameterName();
         String message = parameterName + "类型不匹配";
+        ErrorResult errorResult = new ErrorResult(message);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ErrorResult> requestUrlParamLose(MissingServletRequestParameterException ex) {
+        String parameterName = ex.getParameterName();
+        String message = "URL参数" + parameterName + "缺失";
         ErrorResult errorResult = new ErrorResult(message);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
     }

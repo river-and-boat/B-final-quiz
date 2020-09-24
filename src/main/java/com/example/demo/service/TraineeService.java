@@ -36,6 +36,7 @@ public class TraineeService {
         if (grouped) {
             return traineeRepository.findAllByGroupIn(groups);
         }
-        return traineeRepository.findAllByGroupNotIn(groups);
+        // 默认group为null，即未分组
+        return traineeRepository.findAllByGroupEquals(null);
     }
 }
