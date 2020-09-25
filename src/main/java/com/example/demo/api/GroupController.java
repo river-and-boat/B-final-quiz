@@ -28,6 +28,7 @@ public class GroupController {
 
     @PatchMapping("/groups/{group_id}")
     @ResponseStatus(HttpStatus.OK)
+    // GTB: - Patch时建议使用单独的ChangeOfXxxDTO, 只包含要修改的字段
     public void updateGroup(@Valid @RequestBody GroupDTO groupDTO,
                                 @PathVariable Long group_id) {
         groupDTO.setId(group_id);

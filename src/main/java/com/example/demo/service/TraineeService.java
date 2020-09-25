@@ -36,6 +36,7 @@ public class TraineeService {
         if (grouped) {
             return traineeRepository.findAllByGroupIn(groups);
         }
+        // GTB：- 尽量不要加注释
         // 默认group为null，即未分组
         return traineeRepository.findAllByGroupEquals(null);
     }

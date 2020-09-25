@@ -29,14 +29,18 @@ public class TraineeController {
 
     @DeleteMapping("/trainees/{trainee_id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    // GTB: - 变量不符合命名规范
+    // GTB: - @PathVariable应该显式写明value属性
     public void deleteTrainee(@PathVariable Long trainee_id) {
         traineeService.deleteTrainee(trainee_id);
     }
 
     @GetMapping("/trainees")
     @ResponseStatus(value = HttpStatus.OK)
+    // GTB: - @RequestParam应该显式写明value属性
     public List<TraineeDTO> getAllUnGroupedTrainees(@RequestParam boolean grouped) {
         List<TraineeEntity> ungroupedTrainees = traineeService.getTrainees(grouped);
+        // GTB: - 建议写一个专门转换List的convert方法，避免类型安全问题
         return ConvertTool.convertObject(ungroupedTrainees, List.class);
     }
 }

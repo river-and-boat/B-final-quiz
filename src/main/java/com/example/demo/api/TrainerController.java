@@ -30,6 +30,7 @@ public class TrainerController {
     @DeleteMapping("/trainers/{trainer_id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     // url中使用_命名,接收参数是否需要用驼峰命名，如何转换？
+    // GTB: - 使用@PathVariable的Value属性
     public void deleteTrainer(@PathVariable Long trainer_id) {
         trainerService.deleteTrainer(trainer_id);
     }

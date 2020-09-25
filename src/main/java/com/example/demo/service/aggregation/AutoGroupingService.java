@@ -37,6 +37,7 @@ public class AutoGroupingService {
     }
 
     @Transactional
+    // GTB: - 过长的方法，可以考虑抽取子方法
     public List<GroupEntity> autoGrouping() {
         init();
         List<TrainerEntity> allTrainer = trainerRepository.findAll();

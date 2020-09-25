@@ -26,6 +26,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ErrorDetailResult> constraintException(ConstraintViolationException ex) {
+        // GTB：- 过长的链式调用，建议使用中间变量进行分割
         ErrorDetailResult errorDetailResult = ErrorDetailResult
                 .builder().errorMessage("对象校验错误").details(new HashMap<>()).build();
         ex.getConstraintViolations()
@@ -69,6 +70,7 @@ public class GlobalExceptionHandler {
                 .body(errorResult);
     }
 
+    // GTB: - XxxNotExistException的异常处理方法可以合并成一个
     @ExceptionHandler(GroupNotExistException.class)
     public ResponseEntity groupNotExist(GroupNotExistException groupNotExistException) {
         ErrorResult errorResult = new ErrorResult(groupNotExistException.getMessage());
